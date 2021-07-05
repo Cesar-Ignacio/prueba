@@ -24,3 +24,9 @@ Route::get('abm-preguntasfrecuentes',[FAQController::class,'obtenerTabla'])->nam
 
 Route::post('AltaPregunta',[FAQController::class,'guardarRegistro'])->name('AltaPregunta');
 
+Route::delete('EliminarPregunta/{id}',[FAQController::class,'Delete'])->name('EliminarPregunta');
+
+Route::post('EditarPregunta/{id}',[FAQController::class,'Editar'])->name('EditarPregunta');
+
+Route::put('ActualizarPregunta/{id}',[FAQController::class,'Update'])->name('ActualizarPregunta');
+

@@ -18,10 +18,10 @@ class FAQController extends BaseController
 
     public function obtenerTabla()
     {
-        $datos = DB::table('preguntas')
+        $datos = DB::table('preguntas')//OBTIENE LOS REGISTROS DE LA BASE DE DATOS
             ->orderBy('id')
             ->get();
-        $cantidad = DB::table('preguntas')->count();
+        $cantidad = DB::table('preguntas')->count();//SE OBTIENE LA CANTIDAD
 
         return view('abm-preguntasfrecuentes', ['datos' => $datos],['cantidad' => $cantidad]);
     }
@@ -44,4 +44,29 @@ class FAQController extends BaseController
     }
 
 
+    public function  Delete($id)
+    {
+       
+        DB::table('preguntas')->delete($id);
+    
+        return redirect()->route('cargarTabla');
+    }
+
+    public function Editar($id)
+    {
+       $preg=DB::table('preguntas')->find($id);//Obtengo un registro.
+       
+       return view('Editar',compact('preg'));
+    }
+
+    public function Update(Request $request,$id)
+    {
+       DB::table('preguntas')->where('id',$id)->update([
+        'pregunta' => $request->Pregunta,
+        'respuesta' => $request->Respuesta,
+        'autor' => $request->Autor
+       ]);
+               
+        return redirect()->route('cargarTabla');
+    }
 }

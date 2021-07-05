@@ -66,11 +66,15 @@
                     <td>{{$dato->respuesta}}</td>
                     <td>{{$dato->autor}}</td>
                     <td></td>
-                    <td><form action="">
-                    <button type="submit">Editar</button>    
+                    <td><form action="{{route('EditarPregunta',$dato->id)}}" method="POST">
+                        @csrf
+                        <button type="submit">Editar</button>    
                     </form></td>
-                    <td><form action="">
-                    <button type="submit">Eliminar</button>    
+
+                    <td><form action="{{route('EliminarPregunta',$dato->id)}}" method="POST">
+                        @csrf
+                        @method('delete')
+                    <button type="submit" onclick="return confirm('Quiere borrar la pregunta {{$dato->id}}?')">Eliminar</button>    
                     </form></td>
                     </tr>
                 @endforeach
