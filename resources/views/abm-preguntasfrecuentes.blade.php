@@ -60,12 +60,15 @@
                 </tr>
 
                 @foreach ($datos as $dato)
-                    <tr>
+                    
+                @if ($dato->estado==1)
+            
+                <tr>
                     <td>{{$dato->id}}</td>
                     <td>{{$dato->pregunta}}</td>
                     <td>{{$dato->respuesta}}</td>
                     <td>{{$dato->autor}}</td>
-                    <td></td>
+                    <td>{{$dato->estado}}</td>
                     <td><form action="{{route('EditarPregunta',$dato->id)}}" method="POST">
                         @csrf
                         <button type="submit">Editar</button>    
@@ -76,7 +79,11 @@
                         @method('delete')
                     <button type="submit" onclick="return confirm('Quiere borrar la pregunta {{$dato->id}}?')">Eliminar</button>    
                     </form></td>
-                    </tr>
+                   
+                </tr>
+                
+                @endif
+
                 @endforeach
 
             </table>
